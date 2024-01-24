@@ -10,8 +10,14 @@ const routes = [
   {
     path: "/register",
     name: "register",
-    meta: { layout: "main" },
+    meta: { layout: "form" },
     component: () => import("../views/Register.vue"),
+  },
+  {
+    path: "/",
+    name: "home",
+    meta: { layout: "main" },
+    component: () => import("../views/HomePage.vue"),
   },
 ];
 

@@ -1,12 +1,17 @@
 <template>
-  <div class="black">
-    <h3>asjfl;ajsf;as</h3>
+  <div class="main-layout">
+    <NavBar></NavBar>
   </div>
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
+
 export default {
   name: "main-layout",
+  components: {
+    NavBar,
+  },
 };
 </script>
 

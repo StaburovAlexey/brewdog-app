@@ -7,4 +7,17 @@
 }
 
 .card-auth {
+  min-width: 300px;
+  box-sizing: border-box;
 }
+
+.btn-submit {
+  width: 100%;
+}
+
+.nav-bar {}
+
+.dropdown-btn {
+  width: 150px;
+}
+
