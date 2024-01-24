@@ -1,5 +1,5 @@
 <template>
-  <h3>ГЛАВНАЯ СТРАНИЦА</h3>
+  <h3>Профиль</h3>
 </template>
 
 <script>

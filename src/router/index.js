@@ -19,6 +19,24 @@ const routes = [
     meta: { layout: "main" },
     component: () => import("../views/HomePage.vue"),
   },
+  {
+    path: "/profile",
+    name: "profile",
+    meta: { layout: "main" },
+    component: () => import("../views/ProfilePage.vue"),
+  },
+  {
+    path: "/search",
+    name: "search",
+    meta: { layout: "main" },
+    component: () => import("../views/SearchPage.vue"),
+  },
+  {
+    path: "/favorite",
+    name: "favorite",
+    meta: { layout: "main" },
+    component: () => import("../views/FavoritePage.vue"),
+  },
 ];
 
 const router = createRouter({

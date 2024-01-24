@@ -15,9 +15,20 @@
   width: 100%;
 }
 
-.nav-bar {}
+.nav-bar {
+}
 
 .dropdown-btn {
-  width: 150px;
+  width: 300px;
+}
+.card{
+  max-width: 500px;
+}
+
+.image-card{
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  object-position: center;
 }
 

@@ -15,9 +15,17 @@
 
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
-          <li>
-            <a href="#!">Профиль<i class="material-icons">account_box</i></a>
+          <li
+            v-for="link in links"
+            :key="link.url"
+            :class="{ active: isActive === link.url }"
+          >
+            <router-link :to="link.url">
+              {{ link.title
+              }}<i class="material-icons">{{ link.icon }}</i></router-link
+            >
           </li>
+          <li class="divider" tabindex="10"></li>
           <li>
             <a href="#!">Выйти<i class="material-icons">cancel</i></a>
           </li>
@@ -31,6 +39,19 @@
 import M from "materialize-css/dist/js/materialize.min";
 import SideBar from "./SideBar.vue";
 export default {
+  data: () => ({
+    links: [
+      { title: "Главная", url: "/", icon: "home" },
+      { title: "Поиск", url: "/search", icon: "search" },
+      { title: "Избранное", url: "/favorite", icon: "favorite" },
+      { title: "Профиль", url: "/profile", icon: "account_box" },
+    ],
+  }),
+  computed: {
+    isActive() {
+      return this.$route.path;
+    },
+  },
   mounted() {
     M.Dropdown.init(this.$refs.dropdown, {
       constrainWidth: true,

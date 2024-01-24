@@ -1,5 +1,5 @@
 <template>
-  <form class="card card-auth">
+  <form class="card card-auth" @submit.prevent="submitHandler">
     <div class="card-content">
       <span class="card-title center">Вход</span>
       <div class="col">
@@ -36,7 +36,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    submitHandler() {
+      this.$router.push("/");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
