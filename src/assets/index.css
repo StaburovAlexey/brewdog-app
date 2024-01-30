@@ -43,3 +43,7 @@
 .span {
   overflow-wrap: break-word;
 }
+
+.container-search{
+  padding: 20px 0 0 0;
+}
