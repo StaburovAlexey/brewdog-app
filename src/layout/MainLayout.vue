@@ -1,7 +1,7 @@
 <template>
-  <div class="main-layout">
+  <div class="main-layout black ">
     <NavBar></NavBar>
-    <main class="app-content black">
+    <main class="app-content white-text">
       <router-view></router-view>
     </main>
   </div>

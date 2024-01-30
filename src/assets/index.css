@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.main-layout {
+  min-height: 100vh;
+}
+
 .card-auth {
   min-width: 300px;
   box-sizing: border-box;
@@ -15,7 +19,8 @@
   width: 100%;
 }
 
-.nav-bar {}
+.nav-bar {
+}
 
 .dropdown-btn {
   width: 300px;
@@ -26,7 +31,6 @@
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   grid-auto-rows: auto;
   gap: 15px;
-
 }
 
 .image-card {
@@ -34,4 +38,8 @@
   height: 200px;
   object-fit: contain;
   object-position: center;
+}
+
+.span {
+  overflow-wrap: break-word;
 }
