@@ -9,7 +9,7 @@
             <i class="material-icons">close</i>
           </div>
           <div class="card">
-            <button type="submit" class="btn"><i class="material-icons">search</i>Искать</button>
+            <button type="submit" class="btn"><i class="material-icons">search</i>Искать</button>т
           </div>
         </form>
       </div>

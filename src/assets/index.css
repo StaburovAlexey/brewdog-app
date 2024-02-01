@@ -45,12 +45,16 @@
   overflow-wrap: break-word;
 }
 
-.container-search{
+.container-search {
   padding: 20px 0 0 0;
 }
 
-.card-abv-ibu{
+.card-abv-ibu {
   display: flex;
   gap: 15px;
-  margin: 0 0 15px 0; 
- }
+  margin: 0 0 15px 0;
+}
+
+.invalid{
+  color: red;
+}
