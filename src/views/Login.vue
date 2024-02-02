@@ -18,10 +18,23 @@
         </div>
         <div class="card-action">
           <div class="center">
-            <button class="btn waves-effect waves-light btn-submit" type="submit">
+            <button class="btn waves-effect waves-light btn-submit" type="submit" v-if="!loading">
               Войти
               <i class="material-icons right">send</i>
             </button>
+            <div class="preloader-wrapper small active" v-else>
+              <div class="spinner-layer spinner-green-only">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                  <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <p class="center">
             Нет аккаунта?
@@ -43,24 +56,30 @@ export default {
   data() {
     return {
       email: "",
-      pass: ""
+      pass: "",
+      loading: false,
     }
   },
   methods: {
     async login() {
+
       if (this.v$.$invalid) {
-        this.v$.$touch();
         alert('Заполните все поля')
       } else {
+        this.loading = true;
         const formData = {
           email: this.email,
           pass: this.pass
         }
         try {
           await this.$store.dispatch("loginUser", formData);
+          const user = await this.$store.dispatch("getUser")
+          this.$store.commit('setUser', user)
           this.$router.push("/");
+          this.loading = false
         } catch (e) {
           alert(e)
+          this.loading = false
         }
       }
     }
