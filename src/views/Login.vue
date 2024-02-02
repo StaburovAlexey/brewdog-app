@@ -1,17 +1,20 @@
 <template>
-  <form class="card card-auth" @submit.prevent="submitHandler">
+  <form class="card card-auth" @submit.prevent="login">
     <div class="card-content">
       <span class="card-title center">Вход</span>
       <div class="col">
         <div class="input-field">
-          <input id="last_name" v-model="mail" type="email" class="validate" />
+          <input id="last_name" v-model="email" type="email" :class="{ invalid: v$.email.$invalid }" />
           <label for="last_name">Почта</label>
-          <small class="helper-text">Введите ваш email</small>
+          <small class="helper-text" v-if="v$.email.required.$invalid">Обязательное поле ввода</small>
+          <small class="helper-text" v-if="v$.email.email.$invalid">Введите коректный email</small>
         </div>
         <div class="input-field">
-          <input id="first_name" type="text" class="validate" v-model="pass" />
+          <input id="first_name" type="text" :class="{ invalid: v$.pass.$invalid }" v-model="pass" />
           <label for="first_name">Пароль</label>
-          <small class="helper-text">Пароль должен сожержать минимуи 6 символов</small>
+          <small class="helper-text" v-if="v$.pass.minLength.$invalid">Пароль должен сожержать минимуи 6 символов</small>
+          <small class="helper-text" v-if="v$.pass.required.$invalid">Обязательное поле ввода</small>
+
         </div>
         <div class="card-action">
           <div class="center">
@@ -31,22 +34,44 @@
 </template>
 
 <script>
-
+import { useVuelidate } from "@vuelidate/core";
+import { email, required, minLength } from "@vuelidate/validators";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
-      mail: "",
+      email: "",
       pass: ""
     }
   },
   methods: {
-    submitHandler() {
-      this.$router.push("/");
-    },
+    async login() {
+      if (this.v$.$invalid) {
+        this.v$.$touch();
+        alert('Заполните все поля')
+      } else {
+        const formData = {
+          email: this.email,
+          pass: this.pass
+        }
+        try {
+          await this.$store.dispatch("loginUser", formData);
+          this.$router.push("/");
+        } catch (e) {
+          alert(e)
+        }
+      }
+    }
   },
-  watch: {
-  }
-};
+  validations() {
+    return {
+      email: { email, required },
+      pass: { required, minLength: minLength(6) },
+    };
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

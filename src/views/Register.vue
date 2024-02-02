@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { supabase } from '@/lib/supabaseClient.js'
+import { supabase } from "@/lib/supabaseClient.js";
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 
@@ -54,20 +54,18 @@ export default {
   },
   methods: {
     async singUp() {
-      const result = await this.v$.$validate()
-      if (!result) {
+      if (this.v$.$invalid) {
         alert('Заполните все поля')
         return;
       }
       try {
-        const { data, error } = await supabase.auth.signUp({
+        const { data } = await supabase.auth.signUp({
           email: this.email,
           password: this.pass,
-          data: {
-            name: this.name
-          }
         })
-
+        await supabase
+          .from('users')
+          .insert({ id: data.user.id, name: this.name })
       } catch (err) {
         console.error(err)
       }
