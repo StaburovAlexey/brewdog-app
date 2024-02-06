@@ -15,6 +15,10 @@ export default {
   components: {
     NavBar,
   },
+  mounted() {
+    console.log('Main layout mounted')
+    this.$store.dispatch('fetchInfoUser');
+  }
 };
 </script>
 

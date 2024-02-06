@@ -22,9 +22,10 @@
         </div>
         <div class="card-action">
           <div class="center">
-            <button class="btn waves-effect waves-light btn-submit" type="submit"> Зарегистрироваться <i
+            <button class="btn waves-effect waves-light btn-submit" type="submit" v-if="!loading"> Зарегистрироваться <i
                 class="material-icons right">send</i>
             </button>
+            <pre-loader v-else></pre-loader>
           </div>
           <p class="center">
             Есть аккаунт?
@@ -37,37 +38,43 @@
 </template>
 
 <script>
+import PreLoader from "@/components/PreLoader.vue";
 import { supabase } from "@/lib/supabaseClient.js";
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 
 export default {
   setup() {
-    return { v$: useVuelidate() }
+    return { v$: useVuelidate() };
   },
   data() {
     return {
       email: "",
       pass: "",
-      name: ""
-    }
+      name: "",
+      loading: false,
+    };
   },
   methods: {
     async singUp() {
       if (this.v$.$invalid) {
-        alert('Заполните все поля')
+        alert('Заполните все поля');
         return;
       }
+      this.loading = true;
+      const formData = {
+        email: this.email,
+        pass: this.pass,
+        name: this.name
+      };
       try {
-        const { data } = await supabase.auth.signUp({
-          email: this.email,
-          password: this.pass,
-        })
-        await supabase
-          .from('users')
-          .insert({ id: data.user.id, name: this.name })
-      } catch (err) {
-        console.error(err)
+        await this.$store.dispatch('registerUser', formData);
+        this.$router.push("/");
+        this.loading = false;
+      }
+      catch (err) {
+        this.loading = false;
+        console.error(err);
       }
     }
   },
@@ -76,8 +83,9 @@ export default {
       email: { required, email },
       pass: { required, minLength: minLength(6) },
       name: { required }
-    }
-  }
+    };
+  },
+  components: { PreLoader }
 }
 </script>
 

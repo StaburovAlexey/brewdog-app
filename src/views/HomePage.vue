@@ -1,9 +1,15 @@
 <template>
-  <h3>ГЛАВНАЯ СТРАНИЦА</h3>
+  <h3 class="white-text">{{ user }}</h3>
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
