@@ -78,6 +78,7 @@ export default {
       pass: { required, minLength: minLength(6) },
     };
   },
+  
   components: { PreLoader }
 }
 </script>

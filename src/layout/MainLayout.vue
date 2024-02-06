@@ -15,11 +15,14 @@ export default {
   components: {
     NavBar,
   },
-  mounted() {
-    console.log('Main layout mounted')
-    this.$store.dispatch('fetchInfoUser');
-  }
-};
+  async mounted() {
+    const user = await this.$store.dispatch('getUser')
+    if (user) {
+      await this.$store.dispatch("fetchInfoUser");
+    }
+
+  },
+}
 </script>
 
 <style lang="scss" scoped></style>

@@ -24,14 +24,14 @@ export default {
         throw error;
       }
     },
-    async singOut({ dispatch }) {
-      const { error } = await supabase.auth.signOut();
-    },
-    async getUser({ dispatch }) {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      return user;
+    async singOut({ dispatch, commit }) {
+      try {
+        await supabase.auth.signOut();
+        commit("clearUser");
+      } catch (e) {
+        throw e;
+      }
     },
   },
+  
 };

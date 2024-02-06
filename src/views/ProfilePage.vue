@@ -3,13 +3,13 @@
     <div class="card ">
       <div class="card-content">
         <span class="card-title">Имя</span>
-        <p>Диего Гонзалез</p>
+        <p>{{ user.name }}</p>
       </div>
     </div>
     <div class="card ">
       <div class="card-content">
         <span class="card-title">Почта</span>
-        <p>user@usermail.com</p>
+        <p>{{ user.email }}</p>
       </div>
     </div>
     <button class="btn-large waves-effect" type="button">Выйти из профиля</button>
@@ -17,7 +17,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    user() {
+      return this.$store.getters.user[0];
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

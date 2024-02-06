@@ -16,25 +16,25 @@ const routes = [
   {
     path: "/",
     name: "home",
-    meta: { layout: "main" },
+    meta: { layout: "main", requiresAuth: true },
     component: () => import("../views/HomePage.vue"),
   },
   {
     path: "/profile",
     name: "profile",
-    meta: { layout: "main" },
+    meta: { layout: "main", requiresAuth: true },
     component: () => import("../views/ProfilePage.vue"),
   },
   {
     path: "/search",
     name: "search",
-    meta: { layout: "main" },
+    meta: { layout: "main", requiresAuth: true },
     component: () => import("../views/SearchPage.vue"),
   },
   {
     path: "/favorite",
     name: "favorite",
-    meta: { layout: "main" },
+    meta: { layout: "main", requiresAuth: true },
     component: () => import("../views/FavoritePage.vue"),
   },
 ];
